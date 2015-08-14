@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
+      remember @user
       flash[:success] = 'Welcome to the Sample App!'
       render 'show'
     else
@@ -19,7 +20,6 @@ class UsersController < ApplicationController
   end
 
   private
-
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
